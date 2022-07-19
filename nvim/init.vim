@@ -1,5 +1,6 @@
 call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
     Plug 'chrisbra/csv.vim'
+    Plug 'christoomey/vim-tmux-navigator'
     Plug 'moll/vim-bbye'
     Plug 'junegunn/fzf.vim'
     Plug 'simeji/winresizer'
@@ -39,6 +40,9 @@ let mapleader = "\<space>"
 nnoremap <leader>bn :bn<cr> ;buffer next
 nnoremap <leader>tn gt ;new tab
 
+" match tmux h split
+nnoremap <c-w>h <c-w>s
+
 " configure csv
 augroup filetype_csv
     autocmd!
@@ -49,3 +53,4 @@ augroup END
 
 " configure winresizer
 let g:winresizer_start_key = "<leader>w"
+
