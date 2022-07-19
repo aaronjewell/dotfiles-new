@@ -5,7 +5,7 @@
 ########
 mkdir -p "$XDG_CONFIG_HOME/nvim"
 mkdir -p "$XDG_CONFIG_HOME/nvim/undo"
-ln -sf "$DOTFILES/nvim/init.vim" "$XDG_CONFIG_HOME/nvim"
+ln -sf "$DOTFILES/nvim/init.lua" "$XDG_CONFIG_HOME/nvim"
 
 # install plug.vim neovim plugin manager
 [ ! -f "$DOTFILES/nvim/autoload/plug.vim" ] \
@@ -60,3 +60,9 @@ ln -sf "$DOTFILES/tmux/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
 [ ! -d "$XDG_CONFIG_HOME/tmux/plugins/tpm" ] \
     && git clone https://github.com/tmux-plugins/tpm \
     "$XDG_CONFIG_HOME/tmux/plugins/tpm"
+
+############
+# phpactor #
+############
+mkdir -p "$XDG_CONFIG_HOME/phpactor"
+ln -sf "$DOTFILES/phpactor/phpactor.yml" "$XDG_CONFIG_HOME/phpactor/phpactor.yml"
