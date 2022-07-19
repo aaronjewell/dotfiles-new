@@ -11,13 +11,19 @@ require('packer').startup(function()
                 'williamboman/nvim-lsp-installer',
             }
         }
+    use 'moll/vim-bbye'
+    use 'ncm2/ncm2'
     use {
             'phpactor/phpactor',
             ft = 'php',
             tag = '*',
             run = 'composer install --no-dev -o'
         }
-    use 'moll/vim-bbye'
+    use 'phpactor/ncm2-phpactor'
+    use {
+        'roxma/nvim-yarp',
+        run = 'pip install -r requirements.txt'
+    }
     use 'simeji/winresizer'
     use 'simnalamburt/vim-mundo'
 end)
@@ -118,3 +124,7 @@ require('nvim-lsp-setup').setup({
         -- },
     },
 })
+
+-- Configure phpactor ncm2
+vim.cmd("autocmd BufEnter * call ncm2#enable_for_buffer()")
+vim.opt.completeopt = "noinsert,menuone,noselect"
