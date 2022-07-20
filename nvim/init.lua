@@ -3,6 +3,7 @@ require('packer').startup(function()
     use 'wbthomason/packer.nvim'
     use 'chrisbra/csv.vim'
     use 'christoomey/vim-tmux-navigator'
+    use 'chun-yang/auto-pairs'
     use 'junegunn/fzf.vim'
     use {
             'junnplus/nvim-lsp-setup',
@@ -12,18 +13,10 @@ require('packer').startup(function()
             }
         }
     use 'moll/vim-bbye'
-    use 'ncm2/ncm2'
     use {
-            'phpactor/phpactor',
-            ft = 'php',
-            tag = '*',
-            run = 'composer install --no-dev -o'
+            'ms-jpq/coq_nvim',
+            branch = 'coq'
         }
-    use 'phpactor/ncm2-phpactor'
-    use {
-        'roxma/nvim-yarp',
-        run = 'pip install -r requirements.txt'
-    }
     use 'simeji/winresizer'
     use 'simnalamburt/vim-mundo'
 end)
@@ -36,7 +29,7 @@ vim.o.swapfile = false
 
 -- save undo-trees in files
 vim.opt.undofile = true
-vim.opt.undodir = "$XDG_CONFIG_HOME/nvim/undo"
+vim.opt.undodir = os.getenv("XDG_CONFIG_HOME") .. "/nvim/undo"
 vim.opt.undolevels = 10000
 vim.opt.undoreload = 10000
 
@@ -73,8 +66,18 @@ vim.cmd("augroup END")
 -- configure winresizer
 vim.g['winresizer_start_key'] = "<leader>w"
 
+-- coq
+vim.g['coq_settings'] = {
+    auto_start = 'shut-up',
+    xdg = true,
+    ['display.ghost_text.context'] = {' ⟨ ', ' ⟩ '},
+    ['display.pum.source_context'] = {'⌈', '⌋'}
+}
+
 -- setup native lsp
-require('nvim-lsp-setup').setup({
+local coq = require('coq')
+
+require('nvim-lsp-setup').setup(coq.lsp_ensure_capabilities({
     -- nvim-lsp-installer
     -- https://github.com/williamboman/nvim-lsp-installer#configuration
     installer = {},
@@ -122,9 +125,7 @@ require('nvim-lsp-setup').setup({
         --         },
         --     },
         -- },
+        intelephense = {}
     },
-})
+}))
 
--- Configure phpactor ncm2
-vim.cmd("autocmd BufEnter * call ncm2#enable_for_buffer()")
-vim.opt.completeopt = "noinsert,menuone,noselect"

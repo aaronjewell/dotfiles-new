@@ -28,3 +28,11 @@ ftmuxp() {
         tmuxp load "$ID"
     fi
 }
+
+wikipedia() {
+    lynx -vikeys -accept_all_cookies "https://en.wikipedia.org/wiki?search=$@"
+}
+
+duckduckgo() {
+    lynx -vikeys -accept_all_cookies "https://lite.duckduckgo.com/lite/?q='$@'"
+}

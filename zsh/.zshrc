@@ -61,3 +61,10 @@ fi
 if [ "$(tty)" = "/dev/tty1" ]; then
     pgrep i3 || exec startx "$XDG_CONFIG_HOME/X11/.xinitrc"
 fi
+
+# Open man pages in neovim
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+
+# Init nvm
+source /usr/share/nvm/init-nvm.sh
